@@ -8,26 +8,11 @@ fn main() {
 }
 
 fn solve_part_1(matrix: &[Vec<u32>]) -> u32 {
-    matrix.iter().map(|row| {
-        let max = row.iter().max().unwrap();
-        let min = row.iter().min().unwrap();
-
-        max - min
-    }).sum()
+    matrix.iter().map(largest_difference).sum()
 }
 
 fn solve_part_2(matrix: &[Vec<u32>]) -> u32 {
-    matrix.iter().map(|row| {
-        for x in row {
-            for y in row {
-                if x % y == 0 && x != y {
-                    return x / y
-                }
-            }
-        }
-        
-        0
-    }).sum()
+    matrix.iter().map(even_division).sum()
 }
 
 fn parse_input(input: &'static str) -> Vec<Vec<u32>> {
@@ -41,6 +26,25 @@ fn parse_line(line: &str) -> Vec<u32> {
     line.split_whitespace().
         map(|word| word.parse::<u32>().unwrap()).
         collect()
+}
+
+fn largest_difference(row: &Vec<u32>) -> u32 {
+    let max = row.iter().max().unwrap();
+    let min = row.iter().min().unwrap();
+
+    max - min
+}
+
+fn even_division(row: &Vec<u32>) -> u32 {
+    for x in row {
+        for y in row {
+            if x % y == 0 && x != y {
+                return x / y
+            }
+        }
+    }
+
+    0
 }
 
 #[cfg(test)]
