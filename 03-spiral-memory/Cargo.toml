@@ -1,0 +1,7 @@
+[package]
+name = "spiral-memory"
+version = "0.1.0"
+authors = ["David Celis <me@davidcel.is>"]
+
+[dependencies]
+nalgebra = "0.13"
